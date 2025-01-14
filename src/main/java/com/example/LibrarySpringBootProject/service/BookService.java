@@ -39,4 +39,14 @@ public class BookService {
     public void deleteBook(Book book){
         bookRepository.delete(book);
     }
+
+    public void deleteBookById(Integer id){
+        bookRepository.deleteById(id);
+    }
+
+    public void deleteBooksByIds(List<Integer> ids){
+        for(Integer id : ids){
+            bookRepository.deleteById(id);
+        }
+    }
 }
