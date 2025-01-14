@@ -26,6 +26,7 @@ public class BookController {
         List<BookDto> bookDtos = bookService.getAllBooks();
         model.addAttribute("title", "Books");
         model.addAttribute("books", bookDtos);
+        model.addAttribute("book", new Book());
         return "books";
     }
 
