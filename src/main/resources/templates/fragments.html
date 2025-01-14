@@ -16,8 +16,10 @@
         <a class="header" href="/"><span sec:authorize="isAuthenticated()">Home</span></a>
         <a class="header" href="/users"><span sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">Users</span></a>
         <a class="header" href="/user"><span sec:authorize="isAuthenticated() and hasAuthority('USER')">User</span></a>
-        <a class="header" href="/roles"><span sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">Roles</span></a></p>
-    <a class="header" href="/admin"><span sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">Admin</span></a></p>
+        <a class="header" href="/roles"><span sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">Roles</span></a>
+        <a class="header" href="/admin"><span sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">Admin</span></a>
+        <a class="header" href="/books"><span sec:authorize="isAuthenticated() and hasAuthority('USER')">Books</span></a>
+    </p>
     <p></p>
 </div>
 
@@ -48,6 +50,24 @@
         </tr>
     </table>
 </div>
+
+<div th:fragment="books_table">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.price}"></td>
+            <td th:text="${book.stock}"></td>
+        </tr>
+    </table>
+</div>
+
 <div th:fragment="footer">
     <div class="footer"><p class="footer">Inginerie Software 2024</p></div>
 </div>
