@@ -17,27 +17,27 @@ public class RoleService {
 
     private final RoleMapper roleMapper;
 
-    public RoleDto getRoleById(Integer id){
+    public RoleDto getRoleById(Integer id) {
         return roleMapper.roleEntityToDto(roleRepository.findById(id).orElse(null));
     }
 
-    public RoleDto findByRole(String role){
+    public RoleDto findByRole(String role) {
         return roleMapper.roleEntityToDto(roleRepository.findByRole(role));
     }
 
-    public List<RoleDto> getAllRoles(){
+    public List<RoleDto> getAllRoles() {
         return roleMapper.roleListEntityToDto(roleRepository.findAll());
     }
 
-    public RoleDto createRole(Role role){
+    public RoleDto createRole(Role role) {
         return roleMapper.roleEntityToDto(roleRepository.save(role));
     }
 
-    public RoleDto updateRole(Role role){
+    public RoleDto updateRole(Role role) {
         return roleMapper.roleEntityToDto(roleRepository.save(role));
     }
 
-    public void deleteRole(Role role){
+    public void deleteRole(Role role) {
         roleRepository.delete(role);
     }
 
