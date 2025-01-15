@@ -38,10 +38,11 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping("/books/delete")
-    public String deleteBooks(@RequestParam List<Integer> selectedBooks) {
-        bookService.deleteBooksByIds(selectedBooks);
-
+    @PostMapping("/deleteBook")
+    public String deleteBooks(@RequestParam List<String> selectedBooks) {
+        if(!selectedBooks.isEmpty()){
+            bookService.deleteBooksByTitle(selectedBooks);
+        }
         return "redirect:/books";
     }
 }
