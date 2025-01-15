@@ -52,7 +52,9 @@ public class BookController {
         }
         else
             if(action.equals("sell")){
+                if(sellQuantity != null && sellQuantity > 0){
                     bookService.updateBook(selectedBook, sellQuantity);
+                }
             }
 
 
