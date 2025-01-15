@@ -11,6 +11,11 @@
 <div class="body">
     <h1>Books</h1>
     <!--<div th:replace="~{fragments :: books_table}"></div>-->
+
+    <div th:unless="${showError == null}" class="alert alert-danger" role="alert">
+        Please select at least one book to perform the action.
+    </div>
+
     <form th:action="@{/actionBook}" method="post">
         <table class="table">
             <thead>
@@ -30,7 +35,7 @@
                     <td th:text="${book.author}"></td>
                     <td th:text="${book.price}"></td>
                     <td th:text="${book.stock}"></td>
-                    <td><input type="number" name="sellQuantity" value="1" min="1" class="form-control" /></td>
+                    <td><input type="number" name="sellQuantity" value="0" min="0" class="form-control" /></td>
                 </tr>
             </tbody>
         </table>
