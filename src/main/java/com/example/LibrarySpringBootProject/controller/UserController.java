@@ -1,12 +1,13 @@
 package com.example.LibrarySpringBootProject.controller;
 
 import com.example.LibrarySpringBootProject.dto.UserDto;
+import com.example.LibrarySpringBootProject.model.Book;
+import com.example.LibrarySpringBootProject.model.RegistrationRequest;
 import com.example.LibrarySpringBootProject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,9 +26,36 @@ public class UserController {
         return "users";
     }
 
+    @PostMapping("/createUser")
+    public String createBook(@ModelAttribute("user") RegistrationRequest registrationRequest){
+        userService.registerUser(registrationRequest);
+        return "redirect:/users";
+    }
+
     @GetMapping("/users/{id}")
     public UserDto getUserById(@PathVariable Integer id){
         return userService.getUserById(id);
+    }
+
+
+    @PostMapping("/actionUser")
+    public String deleteOrUpdateUser(@RequestParam(required = false) List<String> selectedUsers,
+                                     @RequestParam(required = false) String updateUser,
+                                     @RequestParam(required = false) String newEmailAddress) {
+
+        if(selectedUsers != null){
+            for(String selectedUser : selectedUsers){
+                userService.deleteUserByUsername(selectedUser);
+            }
+        }
+
+        if(updateUser != null){
+            if(newEmailAddress != null){
+                userService.updateUserEmail(updateUser, newEmailAddress);
+            }
+        }
+
+        return "redirect:/books";
     }
 }
 
