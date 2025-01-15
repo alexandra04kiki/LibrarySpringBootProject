@@ -14,7 +14,6 @@
 
     <form th:action="@{/deleteBook}" method="post">
         <table class="table">
-            <thead>
                 <tr>
                     <th>Select</th>
                     <th>Title</th>
@@ -22,19 +21,20 @@
                     <th>Price</th>
                     <th>Stock</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr th:each="book : ${books}">
-                    <td><input type="checkbox" name="selectedBooks" th:value="${book.title}" /></td>
+                    <td><input type="checkbox" name="selectedBooks" th:value="${book.title}" class="form-control"/></td>
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.author}"></td>
                     <td th:text="${book.price}"></td>
                     <td th:text="${book.stock}"></td>
                 </tr>
-            </tbody>
         </table>
 
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <!--<div th:unless="${selectedBooks.size() > 0}" class="alert alert-warning">
+            Please select at least one book to delete.
+        </div>-->
+
+        <input type="submit" value="Delete"  class="btn btn-danger">
     </form>
 </div>
 
