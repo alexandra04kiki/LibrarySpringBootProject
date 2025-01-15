@@ -26,8 +26,8 @@ public class UserController {
         return "users";
     }
 
-    @PostMapping("/createUser")
-    public String createBook(@ModelAttribute("user") RegistrationRequest registrationRequest){
+    @PostMapping("/createUserAsAdmin")
+    public String createUser(@ModelAttribute("user") RegistrationRequest registrationRequest){
         userService.registerUser(registrationRequest);
         return "redirect:/users";
     }
