@@ -42,7 +42,10 @@ public class BookService {
 
     public void deleteBooksByTitle(List<String> titles){
         for(String title : titles){
-            bookRepository.deleteByTitle(title);
+            Book book = bookRepository.findByTitle(title);
+            if(book != null){
+                deleteBook(book);
+            }
         }
     }
 }
