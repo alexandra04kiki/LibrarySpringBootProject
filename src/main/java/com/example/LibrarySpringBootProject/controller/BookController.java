@@ -38,11 +38,21 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping("/deleteBook")
-    public String deleteBooks(@RequestParam List<String> selectedBooks) {
-        if(!selectedBooks.isEmpty()){
-            bookService.deleteBooksByTitle(selectedBooks);
+    @PostMapping("/actionBook")
+    public String deleteOrUpdateBooks(@RequestParam("action") String action, @RequestParam List<String> selectedBooks, @RequestParam(required = false) List<Integer> sellQuantity) {
+
+        if(action.equals("delete")){
+            if(!selectedBooks.isEmpty()){
+                bookService.deleteBooksByTitle(selectedBooks);
+            }
         }
+        else
+            if(action.equals("sell")){
+                if(!selectedBooks.isEmpty()){
+                    bookService.updateBooks(selectedBooks, sellQuantity);
+                }
+            }
+
         return "redirect:/books";
     }
 }

@@ -48,4 +48,18 @@ public class BookService {
             }
         }
     }
+
+    public void updateBooks(List<String> selectedBooks, List<Integer> sellQuantity) {
+        for(int i = 0; i < selectedBooks.size(); i++){
+            Book book = bookRepository.findByTitle(selectedBooks.get(i));
+            if(book != null){
+                if(sellQuantity.get(i) > 0){
+                    if(book.getStock() > sellQuantity.get(i)){
+                        book.setStock(book.getStock() - sellQuantity.get(i));
+                        bookRepository.save(book);
+                    }
+                }
+            }
+        }
+    }
 }

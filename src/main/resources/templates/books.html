@@ -11,7 +11,7 @@
 <div class="body">
     <h1>Books</h1>
     <!--<div th:replace="~{fragments :: books_table}"></div>-->
-    <form th:action="@{/deleteBook}" method="post">
+    <form th:action="@{/actionBook}" method="post">
         <table class="table">
             <thead>
                 <tr>
@@ -20,6 +20,7 @@
                     <th>Author</th>
                     <th>Price</th>
                     <th>Stock</th>
+                    <th>Sell Quantity</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,10 +30,16 @@
                     <td th:text="${book.author}"></td>
                     <td th:text="${book.price}"></td>
                     <td th:text="${book.stock}"></td>
+                    <td><input type="number" name="sellQuantity" value="1" min="1" class="form-control" /></td>
                 </tr>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-danger">Delete</button>
+
+        <button type="submit" name="action" value="sell" class="btn btn-primary">Sell</button>
+
+        <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+
+        <!--<button type="submit" class="btn btn-danger">Delete</button> -->
     </form>
 </div>
 
