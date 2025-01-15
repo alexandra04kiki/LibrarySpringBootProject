@@ -23,7 +23,6 @@
         <p>E-mail address: <span th:text="${user.emailAddress}"></span></p>
         <table>
             <tr>
-                <th>Id</th>
                 <th>Authority</th>
             </tr>
             <tr th:each="role : ${user.roles}">
