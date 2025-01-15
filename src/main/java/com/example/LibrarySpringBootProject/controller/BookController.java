@@ -39,19 +39,24 @@ public class BookController {
     }
 
     @PostMapping("/actionBook")
-    public String deleteOrUpdateBooks(@RequestParam("action") String action, @RequestParam List<String> selectedBooks, @RequestParam(required = false) List<Integer> sellQuantity) {
+    public String deleteOrUpdateBooks(@RequestParam("action") String action,
+                                      @RequestParam List<String> selectedBooks,
+                                      @RequestParam(required = false) List<Integer> sellQuantity,
+                                      Model model) {
+        if(selectedBooks == null || selectedBooks.isEmpty()){
+            model.addAttribute("books", bookService.getAllBooks());
+            model.addAttribute("showError", true);
+            return "books";
+        }
 
         if(action.equals("delete")){
-            if(!selectedBooks.isEmpty()){
                 bookService.deleteBooksByTitle(selectedBooks);
-            }
         }
         else
             if(action.equals("sell")){
-                if(!selectedBooks.isEmpty()){
                     bookService.updateBooks(selectedBooks, sellQuantity);
-                }
             }
+
 
         return "redirect:/books";
     }
