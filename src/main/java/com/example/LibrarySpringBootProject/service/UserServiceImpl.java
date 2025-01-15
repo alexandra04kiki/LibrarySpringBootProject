@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -75,5 +76,21 @@ public class UserServiceImpl implements UserService{
 
     public void deleteUser(User user){
         userRepository.delete(user);
+    }
+
+    @Override
+    public void deleteUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        user.ifPresent(userRepository::delete);
+    }
+
+    @Override
+    public void updateUserEmail(String username, String newEmailAddress) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isPresent()){
+            User userEntity = user.get();
+            userEntity.setEmailAddress(newEmailAddress);
+            userRepository.save(userEntity);
+        }
     }
 }
