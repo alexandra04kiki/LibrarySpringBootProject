@@ -39,11 +39,19 @@ public class BookController {
     }
 
     @PostMapping("/deleteBook")
-    public String deleteBook(@RequestParam(required = false) List<String> selectedBooks) {
+    public String deleteBook(@RequestParam(required = false) List<String> selectedBooks,
+                             @RequestParam(required = false) String sellBook,
+                             @RequestParam(required = false) Integer sellQuantity) {
 
         if(selectedBooks != null){
             for(String selectedBook : selectedBooks){
                 bookService.deleteBookByTitle(selectedBook);
+            }
+        }
+
+        if(sellBook != null){
+            if(sellQuantity != null){
+                bookService.updateBook(sellBook, sellQuantity);
             }
         }
 
