@@ -23,6 +23,7 @@ public class UserController {
         List<UserDto> userDtos = userService.getAllUsers();
         model.addAttribute("title", "Users");
         model.addAttribute("users", userDtos);
+        model.addAttribute("user", new RegistrationRequest());
         return "users";
     }
 
