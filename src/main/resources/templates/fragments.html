@@ -68,6 +68,78 @@
     </table>
 </div>
 
+<div th:fragment="books_table_delete_update">
+    <form th:action="@{/actionBook}" method="post">
+        <table class="table">
+            <tr>
+                <th>Select to delete</th>
+                <th>Select to sell</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+            <tr th:each="book : ${books}">
+                <td><input type="checkbox" name="selectedBooks" th:value="${book.title}" class="form-control"/></td>
+                <td><input type="radio" name="sellBook" th:value="${book.title}" class="form-control"/></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.price}"></td>
+                <td th:text="${book.stock}"></td>
+            </tr>
+        </table>
+
+        <div class="mb-3 row">
+            <label for="sellQuantity" class="col-sm-2 col-form-label">Sell Quantity</label>
+            <div class="col-sm-6">
+                <input type="number" id="sellQuantity" name="sellQuantity" value="0" min="0" class="form-control" />
+            </div>
+        </div>
+
+        <input type="submit" value="Sell"  class="btn btn-danger">
+        <input type="submit" value="Delete"  class="btn btn-danger">
+    </form>
+</div>
+
+<div th:fragment="createBookForm">
+    <form th:action="@{/createBook}" method="post" th:object="${book}" class="px-4">
+        <div class="mb-3 row">
+            <label for="title" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-6">
+                <input type="text"  id="title" autofocus="autofocus"
+                       class="form-control" required name="title" th:field="*{title}" >
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="author" class="col-sm-2 col-form-label">Author</label>
+            <div class="col-sm-6">
+                <input type="text"  id="author" autofocus="autofocus"
+                       class="form-control" required name="author" th:field="*{author}" >
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="price" class="col-sm-2 col-form-label">Price</label>
+            <div class="col-sm-6">
+                <input type="text"  id="price" autofocus="autofocus"
+                       class="form-control" required name="price" th:field="*{price}" >
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="stock" class="col-sm-2 col-form-label">Stock</label>
+            <div class="col-sm-6">
+                <input type="text"  id="stock" autofocus="autofocus"
+                       class="form-control" required name="stock" th:field="*{stock}" >
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success">Add book</button>
+        </div>
+    </form>
+</div>
+
 <div th:fragment="footer">
     <div class="footer"><p class="footer">Inginerie Software 2024</p></div>
 </div>
