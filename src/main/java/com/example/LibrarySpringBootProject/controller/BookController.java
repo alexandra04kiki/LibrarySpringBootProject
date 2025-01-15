@@ -39,7 +39,7 @@ public class BookController {
     }
 
     @PostMapping("/deleteBook")
-    public String deleteBook(@RequestParam List<String> selectedBooks) {
+    public String deleteBook(@RequestParam(required = false) List<String> selectedBooks) {
 
         if(selectedBooks != null){
             for(String selectedBook : selectedBooks){
@@ -47,6 +47,6 @@ public class BookController {
             }
         }
 
-        return "redirect:";
+        return "redirect:/books";
     }
 }
