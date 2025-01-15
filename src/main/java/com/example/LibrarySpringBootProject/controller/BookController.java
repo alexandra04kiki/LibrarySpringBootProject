@@ -41,12 +41,10 @@ public class BookController {
     @PostMapping("/actionBook")
     public String deleteOrUpdateBooks(@RequestParam("action") String action,
                                       @RequestParam List<String> selectedBooks,
-                                      @RequestParam(required = false) List<Integer> sellQuantity,
-                                      Model model) {
+                                      @RequestParam(required = false) List<Integer> sellQuantity) {
+        
         if(selectedBooks == null || selectedBooks.isEmpty()){
-            model.addAttribute("books", bookService.getAllBooks());
-            model.addAttribute("showError", true);
-            return "books";
+            return "redirect:/books";
         }
 
         if(action.equals("delete")){
