@@ -16,6 +16,7 @@ public class Book {
     private Integer id;
 
     @NonNull
+    @Column(unique = true)
     private String title;
 
     @NonNull

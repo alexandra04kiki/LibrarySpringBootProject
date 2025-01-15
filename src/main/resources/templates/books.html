@@ -11,7 +11,7 @@
 <div class="body">
     <h1>Books</h1>
     <!--<div th:replace="~{fragments :: books_table}"></div>-->
-    <form th:action="@{/books/delete}" method="post">
+    <form th:action="@{/deleteBook}" method="post">
         <table class="table">
             <thead>
                 <tr>
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 <tr th:each="book : ${books}">
-                    <td><input type="checkbox" name="selectedBooks" th:value="${book.id}" /></td>
+                    <td><input type="checkbox" name="selectedBooks" th:value="${book.title}" /></td>
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.author}"></td>
                     <td th:text="${book.price}"></td>
