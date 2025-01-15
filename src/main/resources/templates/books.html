@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <tr th:each="book : ${books}">
-                    <td><input type="radio" name="selectedBooks" th:value="${book.title}" /></td>
+                    <td><input type="checkbox" name="selectedBooks" th:value="${book.title}" /></td>
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.author}"></td>
                     <td th:text="${book.price}"></td>

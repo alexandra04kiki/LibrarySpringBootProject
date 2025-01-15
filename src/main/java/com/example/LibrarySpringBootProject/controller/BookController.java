@@ -39,10 +39,12 @@ public class BookController {
     }
 
     @PostMapping("/deleteBook")
-    public String deleteBook(@RequestParam String selectedBook) {
-        
-        if(selectedBook != null){
-            bookService.deleteBookByTitle(selectedBook);
+    public String deleteBook(@RequestParam List<String> selectedBooks) {
+
+        if(!selectedBooks.isEmpty()){
+            for(String selectedBook : selectedBooks){
+                bookService.deleteBookByTitle(selectedBook);
+            }
         }
 
         return "redirect:/books";
