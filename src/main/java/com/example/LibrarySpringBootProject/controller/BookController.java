@@ -40,19 +40,19 @@ public class BookController {
 
     @PostMapping("/actionBook")
     public String deleteOrUpdateBooks(@RequestParam("action") String action,
-                                      @RequestParam List<String> selectedBooks,
-                                      @RequestParam(required = false) List<Integer> sellQuantity) {
-        
-        if(selectedBooks == null || selectedBooks.isEmpty()){
+                                      @RequestParam String selectedBook,
+                                      @RequestParam(required = false) Integer sellQuantity) {
+
+        if(selectedBook == null){
             return "redirect:/books";
         }
 
         if(action.equals("delete")){
-                bookService.deleteBooksByTitle(selectedBooks);
+                bookService.deleteBookByTitle(selectedBook);
         }
         else
             if(action.equals("sell")){
-                    bookService.updateBooks(selectedBooks, sellQuantity);
+                    bookService.updateBook(selectedBook, sellQuantity);
             }
 
 

@@ -1,11 +1,8 @@
 package com.example.LibrarySpringBootProject.service;
 
 import com.example.LibrarySpringBootProject.dto.BookDto;
-import com.example.LibrarySpringBootProject.dto.RoleDto;
 import com.example.LibrarySpringBootProject.mapper.BookMapper;
-import com.example.LibrarySpringBootProject.mapper.RoleMapper;
 import com.example.LibrarySpringBootProject.model.Book;
-import com.example.LibrarySpringBootProject.model.Role;
 import com.example.LibrarySpringBootProject.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,26 +37,26 @@ public class BookService {
         bookRepository.delete(book);
     }
 
-    public void deleteBooksByTitle(List<String> titles){
-        for(String title : titles){
-            Book book = bookRepository.findByTitle(title);
-            if(book != null){
-                deleteBook(book);
-            }
+    public void deleteBookByTitle(String title){
+
+        Book book = bookRepository.findByTitle(title);
+        if(book != null){
+            deleteBook(book);
         }
+
     }
 
-    public void updateBooks(List<String> selectedBooks, List<Integer> sellQuantity) {
-        for(int i = 0; i < selectedBooks.size(); i++){
-            Book book = bookRepository.findByTitle(selectedBooks.get(i));
-            if(book != null){
-                if(sellQuantity.get(i) > 0){
-                    if(book.getStock() > sellQuantity.get(i)){
-                        book.setStock(book.getStock() - sellQuantity.get(i));
-                        bookRepository.save(book);
-                    }
+    public void updateBook(String title, Integer sellQuantity) {
+
+        Book book = bookRepository.findByTitle(title);
+        if(book != null){
+            if(sellQuantity > 0){
+                if(book.getStock() > sellQuantity){
+                    book.setStock(book.getStock() - sellQuantity);
+                    bookRepository.save(book);
                 }
             }
         }
+
     }
 }
