@@ -38,8 +38,8 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping("/deleteBook")
-    public String deleteBook(@RequestParam(required = false) List<String> selectedBooks,
+    @PostMapping("/actionBook")
+    public String deleteOrUpdateBook(@RequestParam(required = false) List<String> selectedBooks,
                              @RequestParam(required = false) String sellBook,
                              @RequestParam(required = false) Integer sellQuantity) {
 
